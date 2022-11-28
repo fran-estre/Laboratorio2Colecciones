@@ -15,8 +15,7 @@ public class Movie implements Comparable<Movie>, Comparator<Movie> {
     private Person operator; //Поле может быть null
 
 
- public Movie(long id, String name, Coordinates coordinates, Date creationDate, long oscarsCount, Integer budget, int totalBoxOffice, MpaaRating mpaaRating, Person operator){
-     this.id= id;
+ public Movie( String name, Coordinates coordinates, Date creationDate, long oscarsCount, Integer budget, int totalBoxOffice, MpaaRating mpaaRating, Person operator){
      this.name = name;
      this.coordinates = coordinates;
      this.creationDate=creationDate;
