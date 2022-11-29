@@ -4,6 +4,7 @@ import Client.FileReader;
 import Client.MovieReader;
 
 import Entidades.Movie;
+
 public class DataBoxHandler {
     public static boolean getDataBox(String[] parts, Command command, StringBuilder comments, boolean isInteractive) {
         DataBox dataBox;
@@ -94,19 +95,21 @@ public class DataBoxHandler {
             }
         }
     }
+
     private static DataBox readDataCommandInsert() {
         Movie movieToUpdate = readMovie();
         DataBox dataBox = new DataBox();
         dataBox.setMovie(movieToUpdate);
         return dataBox;
     }
+
     private static Movie readMovie() {
         MovieReader movieReader = new MovieReader();
         return movieReader.read();
     }
 
     /**
-     *  updates a movie by its id, necesito saber como comprobar que este tiene ese id sin escribir todo el objeto
+     * updates a movie by its id, necesito saber como comprobar que este tiene ese id sin escribir todo el objeto
      *
      * @param parts
      * @param comments
@@ -145,7 +148,7 @@ public class DataBoxHandler {
         return dataBox;
     }
 
-    private static DataBox readDataCommandReplace(String[] parts,StringBuilder comments){
+    private static DataBox readDataCommandReplace(String[] parts, StringBuilder comments) {
         if (parts.length < 3) {
             comments.append("The command is incomplete, you need to enter the key and the oscarsCount.");
             return null;
@@ -184,7 +187,7 @@ public class DataBoxHandler {
         return dataBox;
     }
 
-    private static DataBox readDataCommandCountLessThanOscars(String[] parts, StringBuilder comments){
+    private static DataBox readDataCommandCountLessThanOscars(String[] parts, StringBuilder comments) {
         if (parts.length < 2) {
             comments.append("The command is incomplete, you need to enter the oscarsCount.");
             return null;

@@ -2,7 +2,7 @@ package Entidades;
 import java.util.Comparator;
 import java.util.Date;
 
-public class Movie implements Comparable<Movie>, Comparator<Movie> {
+public class Movie implements Comparable<Movie> {
 
     private long id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
@@ -134,8 +134,4 @@ public class Movie implements Comparable<Movie>, Comparator<Movie> {
         return this.getName().compareTo(o.getName());
     }
 
-    @Override
-    public int compare(Movie o1, Movie o2) {
-        return o1.getName().compareTo(o2.getName());
-    }
 }
