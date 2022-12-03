@@ -10,7 +10,7 @@ import java.util.Hashtable;
 import java.util.Scanner;
 
 public class ServerApp {
-    public static Hashtable<Long, Movie> movieHashtable = new Hashtable<>();
+    public static Hashtable<Long, Movie> movieHashtable;
     private static String fileName;
     private static String initialization;
     private static Boolean exit = false;
@@ -42,6 +42,9 @@ public class ServerApp {
 
     public static void main(String[] args) {
         int port;
+        CsvReader reader=new CsvReader();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        File f;
         if (args.length != 2) {
             Scanner scanner = new Scanner(System.in);
             System.out.print("Enter the port: ");
@@ -52,11 +55,13 @@ public class ServerApp {
             port = Integer.parseInt(args[0]);
             setFileName(args[1]);
         }
+        movieHashtable=reader.read(getFileName());
+        f =new File(getFileName());
+        initialization = sdf.format(f.lastModified());
         if (!createIfNotExists(getFileName())) {
             System.out.println("The file is invalid.");
             return;
         }
-
         try {
             KeyboardHandler keyboardHandler = new KeyboardHandler();
             Thread t1 = new Thread(keyboardHandler);
@@ -72,11 +77,14 @@ public class ServerApp {
 
     private static boolean createIfNotExists(String filename) {
         File file = new File(filename);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         if (file.exists())
             return true;
-
         try {
-            return file.createNewFile();
+            boolean created=file.createNewFile();
+            movieHashtable=new Hashtable<>();
+            setInitialization(sdf.format(file.lastModified())) ;
+            return created;
         } catch (IOException e) {
             e.printStackTrace();
             return false;

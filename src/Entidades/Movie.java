@@ -1,4 +1,5 @@
 package Entidades;
+
 import java.util.Comparator;
 import java.util.Date;
 
@@ -15,19 +16,30 @@ public class Movie implements Comparable<Movie> {
     private Person operator; //Поле может быть null
 
 
- public Movie( String name, Coordinates coordinates, Date creationDate, long oscarsCount, Integer budget, int totalBoxOffice, MpaaRating mpaaRating, Person operator){
-     this.name = name;
-     this.coordinates = coordinates;
-     this.creationDate=creationDate;
-     this.oscarsCount = oscarsCount;
-     this.budget = budget;
-     this.totalBoxOffice=totalBoxOffice;
-     this.mpaaRating = mpaaRating;
-     this.operator = operator;
- }
+    public Movie(String name, Coordinates coordinates, Date creationDate, long oscarsCount, Integer budget, int totalBoxOffice, MpaaRating mpaaRating, Person operator) {
+        this.name = name;
+        this.coordinates = coordinates;
+        this.creationDate = creationDate;
+        this.oscarsCount = oscarsCount;
+        this.budget = budget;
+        this.totalBoxOffice = totalBoxOffice;
+        this.mpaaRating = mpaaRating;
+        this.operator = operator;
+    }
 
     public Movie() {
+    }
 
+    public Movie(long id, String name, Coordinates coordinates, Date creationDate, long oscarsCount, Integer budget, int totalBoxOffice, MpaaRating mpaaRating, Person operator) {
+        this.id = id;
+        this.name = name;
+        this.coordinates = coordinates;
+        this.creationDate = creationDate;
+        this.oscarsCount = oscarsCount;
+        this.budget = budget;
+        this.totalBoxOffice = totalBoxOffice;
+        this.mpaaRating = mpaaRating;
+        this.operator = operator;
     }
 
     public long getId() {
@@ -124,6 +136,7 @@ public class Movie implements Comparable<Movie> {
                 personCsv);
         return movieCsv;
     }
+
     @Override
     public String toString() {
         return String.format("id: %s, name: %s", getId(), getName());
