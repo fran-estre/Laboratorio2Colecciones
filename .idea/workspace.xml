@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4629c319-5c2c-4dd7-a7cd-7652a73e27c4" name="Changes" comment="he creado las clases de el servidor&#10;aun necesito entender de que manera llena el servidor la collecion, todo indica que debo crear un metodo que llena la coleccion.">
-      <change afterPath="$PROJECT_DIR$/src/Files/SavedCollection.csv" afterDir="false" />
+    <list default="true" id="4629c319-5c2c-4dd7-a7cd-7652a73e27c4" name="Changes" comment=" he agregado la clase que lee el archivo y extrae la colleccion.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entidades/Movie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entidades/Movie.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Server/ServerApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server/ServerApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Shared/Command.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Shared/Command.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,20 +30,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "C:/Users/FRANCISCO/IdeaProjects/Laboratirio2Collecciones/src/Files"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/FRANCISCO/IdeaProjects/Laboratirio2Collecciones/src/Files&quot;
   },
-  "keyToStringList": {
-    "ChangesTree.GroupingKeys": [
-      "directory",
-      "module"
+  &quot;keyToStringList&quot;: {
+    &quot;ChangesTree.GroupingKeys&quot;: [
+      &quot;directory&quot;,
+      &quot;module&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="Shared" />
@@ -91,7 +89,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669764737476</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary=" he agregado la clase que lee el archivo y extrae la colleccion.">
+      <created>1670062600291</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1670062600291</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -108,7 +113,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Comienzo el nuevo proyecto, estrucuro los paquetes y creo las primeras clases, agrego las entidades ya creadas de el lab anterior." />
     <MESSAGE value="he creado las clases de el servidor&#10;aun necesito entender de que manera llena el servidor la collecion, todo indica que debo crear un metodo que llena la coleccion." />
-    <option name="LAST_COMMIT_MESSAGE" value="he creado las clases de el servidor&#10;aun necesito entender de que manera llena el servidor la collecion, todo indica que debo crear un metodo que llena la coleccion." />
+    <MESSAGE value=" he agregado la clase que lee el archivo y extrae la colleccion." />
+    <option name="LAST_COMMIT_MESSAGE" value=" he agregado la clase que lee el archivo y extrae la colleccion." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -117,6 +123,16 @@
           <properties class="java.lang.NullPointerException" package="java.lang" />
           <option name="timeStamp" value="2" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Server/CsvReader.java</url>
+          <line>37</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Client/CommunicationClient.java</url>
+          <line>46</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

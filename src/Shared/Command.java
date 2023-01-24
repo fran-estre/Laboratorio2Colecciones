@@ -1,6 +1,8 @@
 package Shared;
 
-public class Command {
+import java.io.Serializable;
+
+public class Command implements Serializable {
     private DataBox dataCommand;
     private CommandType commandType;
 
