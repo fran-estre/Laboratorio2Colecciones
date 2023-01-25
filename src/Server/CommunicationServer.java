@@ -32,7 +32,7 @@ public class CommunicationServer {
                 datagramSocket.receive(datagramPacket);
                 SizeMessage sizeMessage = (SizeMessage) SerializationHandler.deserialize(datagramPacket.getData());
                 if (sizeMessage.Size <= 0) continue;
-
+                System.out.println(" ha llegado algo al servidor");
                 ByteArrayOutputStream bos = new ByteArrayOutputStream();
                 int repetition = SerializationHandler.getRepetition(sizeMessage.Size);
                 for (int i = 0; i < repetition; i++) {
