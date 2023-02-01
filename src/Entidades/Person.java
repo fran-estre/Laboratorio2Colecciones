@@ -1,6 +1,8 @@
 package Entidades;
 
-public class Person {
+import java.io.Serializable;
+
+public class Person implements Serializable {
     private String name; //Поле не может быть null, Строка не может быть пустой
     private Long height; //Поле не может быть null, Значение поля должно быть больше 0
     private String passportID; //Строка не может быть пустой, Длина строки должна быть не меньше 4, Поле не может быть null

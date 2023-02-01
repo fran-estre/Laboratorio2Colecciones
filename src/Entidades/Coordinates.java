@@ -1,6 +1,8 @@
 package Entidades;
 
-public class Coordinates {
+import java.io.Serializable;
+
+public class Coordinates implements Serializable {
     private Double x; //Поле не может быть null
     private float y; //Значение поля должно быть больше -43
     public Coordinates(Double x,float y){

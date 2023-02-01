@@ -1,6 +1,8 @@
 package Entidades;
 
-public class Location {
+import java.io.Serializable;
+
+public class Location implements Serializable {
     private Long x; //Поле не может быть null
     private float y;
     private Float z; //Поле не может быть null
