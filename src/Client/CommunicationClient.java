@@ -29,8 +29,12 @@ public class CommunicationClient {
         if (sizeBytes == null) return false;
 
         DatagramPacket sizePacket = new DatagramPacket(sizeBytes, sizeBytes.length, serverAddress, port);
-        this.datagramSocket.send(sizePacket);
-
+        try {
+            this.datagramSocket.send(sizePacket);
+        } catch(Exception e) {
+            System.out.println("An exception was raised when sending datagram, " + e.getMessage() + "\n");
+            return false;
+        }
         int offset = 0;
         for (int i = 0; i < repetition; i++) {
             int partSize = SerializationHandler.SIZE * (i + 1) < command.length ? SerializationHandler.SIZE : command.length - SerializationHandler.SIZE * i;

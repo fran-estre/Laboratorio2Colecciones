@@ -44,6 +44,8 @@ public class ClientApp {
             } catch (UnknownHostException e) {
                 e.printStackTrace();
                 System.out.println("There was an unknown exception. " + e.getMessage());
+            } catch (Exception e) {
+                System.out.println("There was an generic exception. " + e.getMessage());
             }
             System.out.println("Would you like to try again (yes/no)?");
         } while (scanner.nextLine().equalsIgnoreCase("YES"));
