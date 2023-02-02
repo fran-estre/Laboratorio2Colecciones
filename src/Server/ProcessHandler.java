@@ -103,7 +103,6 @@ public class ProcessHandler {
                 update id {element} : обновить значение элемента коллекции, id которого равен заданному
                 remove_key null : удалить элемент из коллекции по его ключу
                 clear : очистить коллекцию
-                save : сохранить коллекцию в файл
                 execute_script file_name : считать и исполнить скрипт из указанного файла. В скрипте содержатся команды в таком же виде, в котором их вводит пользователь в интерактивном режиме.
                 exit : завершить программу (без сохранения в файл)
                 replace_if_greater null {element} : заменить значение по ключу, если новое значение больше старого
@@ -212,7 +211,9 @@ public class ProcessHandler {
     Comparator<Movie> compareByOscars = (o1, o2) -> (int) (o1.getOscarsCount() - o2.getOscarsCount());
 
     private String insert(Command command) {
-        ServerApp.movieHashtable.put(command.getDataCommand().getKey(), command.getDataCommand().getMovie());
+        Movie movie= command.getDataCommand().getMovie();
+        movie.setId(getNewId());
+        ServerApp.movieHashtable.put(command.getDataCommand().getKey(),movie);
         return "The movie was inserted.";
     }
 
@@ -225,5 +226,15 @@ public class ProcessHandler {
             }
         }
         return "The movie with the id doesn't exist.";
+    }
+    private static Long getNewId() {
+        Long maxKey = Long.valueOf(0);
+        for (Map.Entry<Long, Movie> entry : ServerApp.movieHashtable.entrySet()) {
+            if (entry.getKey() > maxKey) {
+                maxKey = entry.getKey();
+            }
+        }
+        maxKey++;
+        return maxKey;
     }
 }

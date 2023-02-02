@@ -4,10 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4629c319-5c2c-4dd7-a7cd-7652a73e27c4" name="Changes" comment="Implementa serializable en las clases de transporte">
+    <list default="true" id="4629c319-5c2c-4dd7-a7cd-7652a73e27c4" name="Changes" comment=" he agregado la clase que lee el archivo y extrae la colleccion.">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Client/ClientApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/ClientApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Client/CommunicationClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/CommunicationClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entidades/Color.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entidades/Color.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entidades/MpaaRating.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entidades/MpaaRating.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Server/ProcessHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server/ProcessHandler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,14 +128,7 @@
       <option name="project" value="LOCAL" />
       <updated>1670062600291</updated>
     </task>
-    <task id="LOCAL-00005" summary="Implementa serializable en las clases de transporte">
-      <created>1675258560050</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1675258560050</updated>
-    </task>
-    <option name="localTasksCounter" value="6" />
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -150,8 +146,7 @@
     <MESSAGE value="Comienzo el nuevo proyecto, estrucuro los paquetes y creo las primeras clases, agrego las entidades ya creadas de el lab anterior." />
     <MESSAGE value="he creado las clases de el servidor&#10;aun necesito entender de que manera llena el servidor la collecion, todo indica que debo crear un metodo que llena la coleccion." />
     <MESSAGE value=" he agregado la clase que lee el archivo y extrae la colleccion." />
-    <MESSAGE value="Implementa serializable en las clases de transporte" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implementa serializable en las clases de transporte" />
+    <option name="LAST_COMMIT_MESSAGE" value=" he agregado la clase que lee el archivo y extrae la colleccion." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -161,44 +156,19 @@
           <option name="timeStamp" value="2" />
         </breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Server/CsvReader.java</url>
-          <line>37</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Client/CommunicationClient.java</url>
-          <line>50</line>
+          <line>46</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Client/ClientApp.java</url>
-          <line>41</line>
-          <option name="timeStamp" value="14" />
+          <url>file://$PROJECT_DIR$/src/Shared/SerializationHandler.java</url>
+          <line>13</line>
+          <option name="timeStamp" value="12" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Client/ClientApp.java</url>
-          <line>44</line>
-          <option name="timeStamp" value="15" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Client/ClientApp.java</url>
-          <line>47</line>
-          <option name="timeStamp" value="18" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Client/CommunicationClient.java</url>
-          <line>32</line>
-          <option name="timeStamp" value="19" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Client/CommandSender.java</url>
-          <line>9</line>
-          <option name="timeStamp" value="20" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Client/CommunicationClient.java</url>
+          <url>file://$PROJECT_DIR$/src/Server/CommunicationServer.java</url>
           <line>34</line>
-          <option name="timeStamp" value="21" />
+          <option name="timeStamp" value="14" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

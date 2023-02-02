@@ -40,7 +40,7 @@ public class ClientApp {
                 return true;
             } catch (SocketException e) {
                 e.printStackTrace();
-                System.out.println("There was an exception while connecting to the server. " + e.getMessage());
+                System.out.println("There was an exception while connecting to the server." + e.getMessage());
             } catch (UnknownHostException e) {
                 e.printStackTrace();
                 System.out.println("There was an unknown exception. " + e.getMessage());
