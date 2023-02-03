@@ -53,7 +53,7 @@ public class DataBoxHandler {
                 if (!isInteractive)
                     return false;
                 command.setCommandType(CommandType.INSERT);
-                dataBox = readDataCommandInsert();
+                dataBox = readDataCommandInsert(parts,comments);
                 command.setDataCommand(dataBox);
                 return dataBox != null;
             }
@@ -96,11 +96,21 @@ public class DataBoxHandler {
         }
     }
 
-    private static DataBox readDataCommandInsert() {
-        Movie movieToUpdate = readMovie();
-        DataBox dataBox = new DataBox();
-        dataBox.setMovie(movieToUpdate);
-        return dataBox;
+    private static DataBox readDataCommandInsert(String[] parts, StringBuilder comments) {
+        if (parts.length < 2) {
+            comments.append("The command is incomplete, you need to enter the key.");
+            return null;
+        }
+        try {
+            Movie movieToUpdate = readMovie();
+            DataBox dataBox = new DataBox();
+            dataBox.setMovie(movieToUpdate);
+            dataBox.setKey( Long.parseLong(parts[1]));
+            return dataBox;
+        } catch (NumberFormatException e) {
+            comments.append("The command is invalid.");
+            return null;
+        }
     }
 
     private static Movie readMovie() {
@@ -117,7 +127,7 @@ public class DataBoxHandler {
      */
     private static DataBox readDataCommandUpdate(String[] parts, StringBuilder comments) {
         if (parts.length < 2) {
-            comments.append("The command is incomplete, you need to enter the key.");
+            comments.append("The command is incomplete, you need to enter the id.");
             return null;
         }
         try {
