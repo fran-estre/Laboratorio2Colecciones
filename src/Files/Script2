@@ -1,0 +1,5 @@
+help
+info
+show
+remove_greater_key 2
+exit
