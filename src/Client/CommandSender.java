@@ -7,6 +7,7 @@ import java.io.IOException;
 
 public class CommandSender {
     public String sendCommand(Command command) {
+        command.setUser(ClientApp.getUser());
         byte[] data = SerializationHandler.serialize(command);
         if (data == null)
             return "There was an error while serialization.";

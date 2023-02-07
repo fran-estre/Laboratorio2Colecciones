@@ -5,8 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4629c319-5c2c-4dd7-a7cd-7652a73e27c4" name="Changes" comment=" resolvi el metodo insert en el que faltaba agragar el key al data box para que se leyera en el servidor.">
-      <change afterPath="$PROJECT_DIR$/src/Files/Script2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entidades/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Files/vacio.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Server/DatabaseConnection.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Server/EncriptionHelper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Laboratorio2Colecciones.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Laboratorio2Colecciones.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Client/ClientApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/ClientApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Client/CommandSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/CommandSender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entidades/Movie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entidades/Movie.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Server/KeyboardHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server/KeyboardHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Server/ProcessHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server/ProcessHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Server/ServerApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server/ServerApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Shared/Command.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Shared/Command.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +33,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -33,23 +49,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/FRANCISCO/IdeaProjects/Laboratirio2Collecciones/src/Files&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "last_opened_file_path": "D:/HerramientaDeProgramacionJava/jars/postgresql-42.5.2.jar",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;ChangesTree.GroupingKeys&quot;: [
-      &quot;directory&quot;,
-      &quot;module&quot;
+  "keyToStringList": {
+    "ChangesTree.GroupingKeys": [
+      "directory",
+      "module"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="Shared" />
@@ -64,8 +81,11 @@
       <recent name="" />
       <recent name="Shared" />
     </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="Server" />
+    </key>
   </component>
-  <component name="RunManager" selected="Application.Client">
+  <component name="RunManager">
     <configuration name="Client" type="Application" factoryName="Application">
       <option name="ALTERNATIVE_JRE_PATH" value="openjdk-19" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -138,7 +158,14 @@
       <option name="project" value="LOCAL" />
       <updated>1675425162309</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary=" resolvi el metodo insert en el que faltaba agragar el key al data box para que se leyera en el servidor.">
+      <created>1675427935611</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1675427935611</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -178,9 +205,9 @@
           <option name="timeStamp" value="12" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Server/CommunicationServer.java</url>
-          <line>34</line>
-          <option name="timeStamp" value="14" />
+          <url>file://$PROJECT_DIR$/src/Server/ProcessHandler.java</url>
+          <line>151</line>
+          <option name="timeStamp" value="13" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

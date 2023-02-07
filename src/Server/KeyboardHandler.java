@@ -7,18 +7,28 @@ public class KeyboardHandler implements Runnable{
     public void run() {
         String data;
         Scanner scanner = new Scanner(System.in);
-        System.out.println("SAVE: to save file\nEXIT: to finish execution");
+        System.out.println("READFILE: to read movies from file\nSAVE: to save file\nSAVEDB: to save to database\nEXIT: to finish execution");
         ProcessHandler processHandler = new ProcessHandler();
         while (!(data = scanner.nextLine().toUpperCase()).equals("EXIT")) {
-            if (data.equals("SAVE")) {
-                System.out.println("Saving file...");
-                try {
-                    System.out.println(processHandler.save());
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
+            switch (data) {
+                case "SAVE" -> {
+                    System.out.println("Saving file...");
+                    System.out.println(processHandler.saveToFile());
                 }
-                System.out.println("SAVE: to save data\nEXIT: to finish execution");
+                case "SAVEDB" -> {
+                    System.out.println("Saving to database...");
+                    System.out.println(processHandler.save());
+                }
+                case "READFILE" -> {
+                    ServerApp.movieHashtable = new CsvReader().read(ServerApp.getFileName());
+                    System.out.println("Read from file...");
+                }
+                case "ADMIN" -> {
+                    processHandler.CreateAdmin();
+                    System.out.println("Ready ADMIN");
+                }
             }
+            System.out.println("READFILE: to read dragons from file\nSAVE: to save file\nSAVEDB: to save to database\nEXIT: to finish execution");
         }
         ServerApp.setExit(true);
     }

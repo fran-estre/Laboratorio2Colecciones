@@ -1,11 +1,14 @@
 package Entidades;
 
 import java.io.Serializable;
+import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.Date;
 
 public class Movie implements Serializable, Comparable<Movie> {
 
+
+    private Integer userId;
     private long id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
     private Coordinates coordinates; //Поле не может быть null
@@ -42,7 +45,13 @@ public class Movie implements Serializable, Comparable<Movie> {
         this.mpaaRating = mpaaRating;
         this.operator = operator;
     }
+    public Integer getUserId() {
+        return userId;
+    }
 
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
     public long getId() {
         return id;
     }
@@ -148,4 +157,28 @@ public class Movie implements Serializable, Comparable<Movie> {
         return this.getName().compareTo(o.getName());
     }
 
+    public String toInsert() {
+        return String.format("""
+                        INSERT INTO public.movie(name, creation_date, oscars_count, total_box_office, budget, mpaa_rating, user_id) VALUES ('%s', '%s', %s, %s, %s, %s, %s);
+                        INSERT INTO public.coordinates(movie_id, x, y) SELECT MAX(id), %s, %s FROM public.movie;
+                        INSERT INTO public.person(movie_id, name, height, passport_id, eye_color) SELECT MAX(id), '%s', %s, %s , %s FROM public.movie;
+                        INSERT INTO public.location(person_id, x, y, z, name) SELECT MAX(id), %s, %s, %s, %s' FROM public.movie;"""
+                , getName()
+                , getCreationDate().toString()
+                , getOscarsCount()
+                , getBudget().toString()
+                , getTotalBoxOffice()
+                , getMpaaRating().toString()
+                , getUserId().toString()
+                , getCoordinates().getX().toString()
+                , getCoordinates().getY()
+                , getOperator().getName()
+                , getOperator().getHeight().toString()
+                , getOperator().getPassportID().toString()
+                , getOperator().getEyeColor().toString()
+                , getOperator().getLocation().getX().toString()
+                , getOperator().getLocation().getY()
+                , getOperator().getLocation().getZ().toString()
+                , getOperator().getLocation().getName());
+    }
 }

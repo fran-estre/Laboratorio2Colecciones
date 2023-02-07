@@ -1,6 +1,7 @@
 package Server;
 
 import Entidades.Movie;
+import Entidades.User;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,6 +15,8 @@ public class ServerApp {
     private static String fileName;
     private static String initialization;
     private static Boolean exit = false;
+
+    private static User currentUser;
 
     public static Boolean getExit() {
         return exit;
@@ -89,6 +92,14 @@ public class ServerApp {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public static User getCurrentUser() {
+        return currentUser;
+    }
+
+    public static void setCurrentUser(User user) {
+        currentUser = user;
     }
 
 }

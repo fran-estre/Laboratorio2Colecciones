@@ -1,6 +1,7 @@
 package Server;
 
 import Entidades.Movie;
+import Entidades.User;
 import Shared.Command;
 import Shared.DataBoxHandler;
 
@@ -10,6 +11,8 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class ProcessHandler {
     public String processCommand(Command command) {
+        if (!isValidUser(command))
+            return "Invalid user";
         return switch (command.getCommandType()) {
             case HELP -> help();
             case INFO -> info();
@@ -28,6 +31,17 @@ public class ProcessHandler {
         };
     }
 
+    public void CreateAdmin() {
+        DatabaseConnection databaseConnection = new DatabaseConnection();
+        databaseConnection.CreateAdmin();
+    }
+    private boolean isValidUser(Command command) {
+        User user = command.getUser();
+        if (user == null)
+            return false;
+        DatabaseConnection databaseConnection = new DatabaseConnection();
+        return databaseConnection.IsValidUser(user);
+    }
     private String executeScript(Command command) {
         StringBuilder dataFile = new StringBuilder();
         dataFile.append(command.getDataCommand().getDataFile());
@@ -67,7 +81,12 @@ public class ProcessHandler {
         return line;
     }
 
-    public String save() throws IOException {
+    public String save() {
+        DatabaseConnection databaseConnection = new DatabaseConnection();
+        ServerApp.movieHashtable = databaseConnection.saveMovies(ServerApp.movieHashtable, ServerApp.getCurrentUser().getUserId());
+        return "The changes was saved in the database";
+    }
+    public String saveToFile()  {
         Iterator<Map.Entry<Long, Movie>> it = ServerApp.movieHashtable.entrySet().iterator();
         String movieString = "";
         while (it.hasNext()) {

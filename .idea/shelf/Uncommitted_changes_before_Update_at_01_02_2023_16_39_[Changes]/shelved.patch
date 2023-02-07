@@ -1,0 +1,162 @@
+Index: src/Entidades/Color.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Entidades;\r\n\r\npublic enum Color {\r\n    RED,\r\n    YELLOW,\r\n    ORANGE,\r\n    BROWN;\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Entidades/Color.java b/src/Entidades/Color.java
+--- a/src/Entidades/Color.java	(revision 44b2befb961bc079fdce129025fa6ca1affeb1fc)
++++ b/src/Entidades/Color.java	(date 1675258489196)
+@@ -1,6 +1,8 @@
+ package Entidades;
+ 
+-public enum Color {
++import java.io.Serializable;
++
++public enum Color implements Serializable {
+     RED,
+     YELLOW,
+     ORANGE,
+Index: src/Entidades/Location.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Entidades;\r\n\r\npublic class Location {\r\n    private Long x; //Поле не может быть null\r\n    private float y;\r\n    private Float z; //Поле не может быть null\r\n    private String name; //Поле не может быть null\r\n\r\n    public Location(Long x, float y, Float z, String name) {\r\n        this.x = x;\r\n        this.y = y;\r\n        this.z = z;\r\n        this.name = name;\r\n    }\r\n\r\n    public Location() {\r\n\r\n    }\r\n\r\n    public Long getX() {\r\n        return x;\r\n    }\r\n\r\n    public void setX(Long x) {\r\n        this.x = x;\r\n    }\r\n\r\n    public float getY() {\r\n        return y;\r\n    }\r\n\r\n    public void setY(float y) {\r\n        this.y = y;\r\n    }\r\n\r\n    public Float getZ() {\r\n        return z;\r\n    }\r\n\r\n    public void setZ(Float z) {\r\n        this.z = z;\r\n    }\r\n\r\n    public String getName() {\r\n        return name;\r\n    }\r\n\r\n    public void setName(String name) {\r\n        this.name = name;\r\n    }\r\n\r\n    public String toCsv() {\r\n        String xCsv = String.format(\"%s,\", getX());\r\n        String yCsv = String.format(\"%s,\", getY());\r\n        String zCsv = String.format(\"%s,\", getZ());\r\n        String nameCsv = String.format(\"%s\", getName());\r\n        return String.format(\"%s%s%s%s\", xCsv, yCsv, zCsv, nameCsv);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Entidades/Location.java b/src/Entidades/Location.java
+--- a/src/Entidades/Location.java	(revision 44b2befb961bc079fdce129025fa6ca1affeb1fc)
++++ b/src/Entidades/Location.java	(date 1675258491901)
+@@ -1,6 +1,8 @@
+ package Entidades;
+ 
+-public class Location {
++import java.io.Serializable;
++
++public class Location implements Serializable {
+     private Long x; //Поле не может быть null
+     private float y;
+     private Float z; //Поле не может быть null
+Index: src/Entidades/Coordinates.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Entidades;\r\n\r\npublic class Coordinates {\r\n    private Double x; //Поле не может быть null\r\n    private float y; //Значение поля должно быть больше -43\r\n    public Coordinates(Double x,float y){\r\n        this.x=x;\r\n        this.y=y;\r\n    }\r\n\r\n    public Coordinates() {\r\n\r\n    }\r\n\r\n    public Double getX() {\r\n        return x;\r\n    }\r\n\r\n    public void setX(Double x) {\r\n        this.x = x;\r\n    }\r\n\r\n    public float getY() {\r\n        return y;\r\n    }\r\n\r\n    public void setY(float y) {\r\n        this.y = y;\r\n    }\r\n    public String toCsv() {\r\n        String xCsv = String.format(\"%s,\", getX());\r\n        String yCsv = String.format(\"%s,\", getY());\r\n        return String.format(\"%s%s\", xCsv, yCsv);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Entidades/Coordinates.java b/src/Entidades/Coordinates.java
+--- a/src/Entidades/Coordinates.java	(revision 44b2befb961bc079fdce129025fa6ca1affeb1fc)
++++ b/src/Entidades/Coordinates.java	(date 1675258491638)
+@@ -1,6 +1,8 @@
+ package Entidades;
+ 
+-public class Coordinates {
++import java.io.Serializable;
++
++public class Coordinates implements Serializable {
+     private Double x; //Поле не может быть null
+     private float y; //Значение поля должно быть больше -43
+     public Coordinates(Double x,float y){
+Index: src/Entidades/Person.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Entidades;\r\n\r\npublic class Person {\r\n    private String name; //Поле не может быть null, Строка не может быть пустой\r\n    private Long height; //Поле не может быть null, Значение поля должно быть больше 0\r\n    private String passportID; //Строка не может быть пустой, Длина строки должна быть не меньше 4, Поле не может быть null\r\n    private Color eyeColor; //Поле может быть null\r\n    private Location location; //Поле может быть null\r\n    public Person(String name,Long height,String passportID,Color eyeColor,Location location){\r\n        this.name=name;\r\n        this.height=height;\r\n        this.passportID=passportID;\r\n        this.eyeColor=eyeColor;\r\n        this.location=location;\r\n    }\r\n\r\n    public Person() {\r\n\r\n    }\r\n\r\n    public String getName() {\r\n        return name;\r\n    }\r\n\r\n    public void setName(String name) {\r\n        this.name = name;\r\n    }\r\n\r\n    public Long getHeight() {\r\n        return height;\r\n    }\r\n\r\n    public void setHeight(Long height) {\r\n        this.height = height;\r\n    }\r\n\r\n    public String getPassportID() {\r\n        return passportID;\r\n    }\r\n\r\n    public void setPassportID(String passportID) {\r\n        this.passportID = passportID;\r\n    }\r\n\r\n    public Color getEyeColor() {\r\n        return eyeColor;\r\n    }\r\n\r\n    public void setEyeColor(Color eyeColor) {\r\n        this.eyeColor = eyeColor;\r\n    }\r\n\r\n    public Location getLocation() {\r\n        return location;\r\n    }\r\n\r\n    public void setLocation(Location location) {\r\n        this.location = location;\r\n    }\r\n\r\n    public String toCsv() {\r\n        String nameCsv = String.format(\"%s,\", getName());\r\n        String heightCsv = String.format(\"%s,\", getHeight());\r\n        String passportIdCsv = String.format(\"%s,\", getPassportID());\r\n        String eyeColorCsv = String.format(\"%s,\", getEyeColor());\r\n        String locationCsv = getLocation().toCsv();\r\n        String personCsv = String.format(\"%s%s%s%s%s\",\r\n                nameCsv,\r\n                heightCsv,\r\n                passportIdCsv,\r\n                eyeColorCsv,\r\n                locationCsv);\r\n        return personCsv;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Entidades/Person.java b/src/Entidades/Person.java
+--- a/src/Entidades/Person.java	(revision 44b2befb961bc079fdce129025fa6ca1affeb1fc)
++++ b/src/Entidades/Person.java	(date 1675258491515)
+@@ -1,6 +1,8 @@
+ package Entidades;
+ 
+-public class Person {
++import java.io.Serializable;
++
++public class Person implements Serializable {
+     private String name; //Поле не может быть null, Строка не может быть пустой
+     private Long height; //Поле не может быть null, Значение поля должно быть больше 0
+     private String passportID; //Строка не может быть пустой, Длина строки должна быть не меньше 4, Поле не может быть null
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"4629c319-5c2c-4dd7-a7cd-7652a73e27c4\" name=\"Changes\" comment=\" he agregado la clase que lee el archivo y extrae la colleccion.\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/Shared/Command.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Shared/Command.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Enum\" />\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2IAxmFVYyeDMMixF8mnb69ZDsno\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,\r\n    &quot;last_opened_file_path&quot;: &quot;C:/Users/FRANCISCO/IdeaProjects/Laboratirio2Collecciones/src/Files&quot;\r\n  },\r\n  &quot;keyToStringList&quot;: {\r\n    &quot;ChangesTree.GroupingKeys&quot;: [\r\n      &quot;directory&quot;,\r\n      &quot;module&quot;\r\n    ]\r\n  }\r\n}</component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CreateClassDialog.RecentsKey\">\r\n      <recent name=\"Shared\" />\r\n    </key>\r\n    <key name=\"CopyFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\Users\\FRANCISCO\\IdeaProjects\\Laboratirio2Collecciones\\src\\Files\" />\r\n      <recent name=\"C:\\Users\\FRANCISCO\\IdeaProjects\\Laboratirio2Collecciones\\src\" />\r\n    </key>\r\n    <key name=\"MoveClassesOrPackagesDialog.RECENTS_KEY\">\r\n      <recent name=\"Entidad\" />\r\n      <recent name=\"Client\" />\r\n      <recent name=\"\" />\r\n      <recent name=\"Shared\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"4629c319-5c2c-4dd7-a7cd-7652a73e27c4\" name=\"Changes\" comment=\"\" />\r\n      <created>1669638366661</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1669638366661</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"Comienzo el nuevo proyecto, estrucuro los paquetes y creo las primeras clases, agrego las entidades ya creadas de el lab anterior.\">\r\n      <created>1669640172068</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1669640172068</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"Comienzo el nuevo proyecto, estrucuro los paquetes y creo las primeras clases, agrego las entidades ya creadas de el lab anterior.\">\r\n      <created>1669642753673</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1669642753673</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"he creado las clases de el servidor&#10;aun necesito entender de que manera llena el servidor la collecion, todo indica que debo crear un metodo que llena la coleccion.\">\r\n      <created>1669764737476</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1669764737476</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\" he agregado la clase que lee el archivo y extrae la colleccion.\">\r\n      <created>1670062600291</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1670062600291</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"5\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"Comienzo el nuevo proyecto, estrucuro los paquetes y creo las primeras clases, agrego las entidades ya creadas de el lab anterior.\" />\r\n    <MESSAGE value=\"he creado las clases de el servidor&#10;aun necesito entender de que manera llena el servidor la collecion, todo indica que debo crear un metodo que llena la coleccion.\" />\r\n    <MESSAGE value=\" he agregado la clase que lee el archivo y extrae la colleccion.\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\" he agregado la clase que lee el archivo y extrae la colleccion.\" />\r\n  </component>\r\n  <component name=\"XDebuggerManager\">\r\n    <breakpoint-manager>\r\n      <breakpoints>\r\n        <breakpoint enabled=\"true\" type=\"java-exception\">\r\n          <properties class=\"java.lang.NullPointerException\" package=\"java.lang\" />\r\n          <option name=\"timeStamp\" value=\"2\" />\r\n        </breakpoint>\r\n        <line-breakpoint enabled=\"true\" type=\"java-line\">\r\n          <url>file://$PROJECT_DIR$/src/Server/CsvReader.java</url>\r\n          <line>37</line>\r\n          <option name=\"timeStamp\" value=\"7\" />\r\n        </line-breakpoint>\r\n        <line-breakpoint enabled=\"true\" type=\"java-line\">\r\n          <url>file://$PROJECT_DIR$/src/Client/CommunicationClient.java</url>\r\n          <line>46</line>\r\n          <option name=\"timeStamp\" value=\"11\" />\r\n        </line-breakpoint>\r\n      </breakpoints>\r\n    </breakpoint-manager>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 44b2befb961bc079fdce129025fa6ca1affeb1fc)
++++ b/.idea/workspace.xml	(date 1675258500237)
+@@ -3,7 +3,11 @@
+   <component name="ChangeListManager">
+     <list default="true" id="4629c319-5c2c-4dd7-a7cd-7652a73e27c4" name="Changes" comment=" he agregado la clase que lee el archivo y extrae la colleccion.">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/Shared/Command.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Shared/Command.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/Entidades/Color.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entidades/Color.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/Entidades/Coordinates.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entidades/Coordinates.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/Entidades/Location.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entidades/Location.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/Entidades/MpaaRating.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entidades/MpaaRating.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/Entidades/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entidades/Person.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -96,7 +100,21 @@
+       <option name="project" value="LOCAL" />
+       <updated>1670062600291</updated>
+     </task>
+-    <option name="localTasksCounter" value="5" />
++    <task id="LOCAL-00005" summary=" he agregado la clase que lee el archivo y extrae la colleccion.">
++      <created>1674578930716</created>
++      <option name="number" value="00005" />
++      <option name="presentableId" value="LOCAL-00005" />
++      <option name="project" value="LOCAL" />
++      <updated>1674578930716</updated>
++    </task>
++    <task id="LOCAL-00006" summary=" he agregado la clase que lee el archivo y extrae la colleccion.">
++      <created>1674681703779</created>
++      <option name="number" value="00006" />
++      <option name="presentableId" value="LOCAL-00006" />
++      <option name="project" value="LOCAL" />
++      <updated>1674681703779</updated>
++    </task>
++    <option name="localTasksCounter" value="7" />
+     <servers />
+   </component>
+   <component name="Vcs.Log.Tabs.Properties">
+@@ -130,8 +148,13 @@
+         </line-breakpoint>
+         <line-breakpoint enabled="true" type="java-line">
+           <url>file://$PROJECT_DIR$/src/Client/CommunicationClient.java</url>
+-          <line>46</line>
+-          <option name="timeStamp" value="11" />
++          <line>24</line>
++          <option name="timeStamp" value="12" />
++        </line-breakpoint>
++        <line-breakpoint enabled="true" type="java-line">
++          <url>file://$PROJECT_DIR$/src/Server/CommunicationServer.java</url>
++          <line>28</line>
++          <option name="timeStamp" value="13" />
+         </line-breakpoint>
+       </breakpoints>
+     </breakpoint-manager>
+Index: src/Entidades/MpaaRating.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Entidades;\r\n\r\npublic enum MpaaRating {\r\n    G,\r\n    PG,\r\n    PG_13,\r\n    R,\r\n    NC_17;\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Entidades/MpaaRating.java b/src/Entidades/MpaaRating.java
+--- a/src/Entidades/MpaaRating.java	(revision 44b2befb961bc079fdce129025fa6ca1affeb1fc)
++++ b/src/Entidades/MpaaRating.java	(date 1675258489653)
+@@ -1,6 +1,8 @@
+ package Entidades;
+ 
+-public enum MpaaRating {
++import java.io.Serializable;
++
++public enum MpaaRating implements Serializable {
+     G,
+     PG,
+     PG_13,
