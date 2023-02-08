@@ -16,18 +16,16 @@ public class CommunicationServer {
         datagramSocket = new DatagramSocket(port);
     }
 
-    public void listen() {
-        try {
-            System.out.println("Server working at " + InetAddress.getLocalHost());
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-            System.out.println("There was an exception while getting local host address. " + e.getMessage());
-        }
+    public void listen() throws UnknownHostException {
+        InetAddress address =InetAddress.getByName("192.168.0.102");
+        System.out.println("Server working at " + address);
 
         ProcessHandler processHandler = new ProcessHandler();
         while (!ServerApp.getExit()) {
             byte[] buffer = new byte[SerializationHandler.SIZE + SerializationHandler.HEADER];
             DatagramPacket datagramPacket = new DatagramPacket(buffer, buffer.length);
+
+            datagramPacket.setAddress(address);
             try {
                 datagramSocket.receive(datagramPacket);
                 SizeMessage sizeMessage = (SizeMessage) SerializationHandler.deserialize(datagramPacket.getData());

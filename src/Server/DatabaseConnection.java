@@ -12,10 +12,12 @@ public class DatabaseConnection {
     String password = "1409";
     String url = "jdbc:postgresql://localhost:5432/MyDatabase";
 
+
     public Hashtable<Long, Movie> getMovies() {
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url, user, password);
+            System.out.println("Connection to de db  established");
             String query = """
                     Select\s
                     movies.user_id,
@@ -96,6 +98,7 @@ public class DatabaseConnection {
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url, user, password);
+            System.out.println("Connection to de db  established");
             Statement stmt;
             String query = "Select password from public.users where name = '"
                     + userToValidate.getName() + "';";
@@ -156,6 +159,7 @@ public class DatabaseConnection {
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url, user, password);
+            System.out.println("Connection to de db  established");
             String query = "Delete from public.movies where user_id = " + userId;
             try (Statement stmt = conn.createStatement()) {
                 stmt.execute(query);

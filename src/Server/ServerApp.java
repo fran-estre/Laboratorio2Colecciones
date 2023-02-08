@@ -6,6 +6,7 @@ import Entidades.User;
 import java.io.File;
 import java.io.IOException;
 import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.Hashtable;
 import java.util.Scanner;
@@ -72,7 +73,7 @@ public class ServerApp {
 
             CommunicationServer communication = new CommunicationServer(port);
             communication.listen();
-        } catch (SocketException e) {
+        } catch (SocketException | UnknownHostException e) {
             e.printStackTrace();
             System.out.println("There was a socket exception. " + e.getMessage());
         }

@@ -4,7 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4629c319-5c2c-4dd7-a7cd-7652a73e27c4" name="Changes" comment=" he agregado la clase que lee el archivo y extrae la colleccion." />
+    <list default="true" id="4629c319-5c2c-4dd7-a7cd-7652a73e27c4" name="Changes" comment="se agrego el driver de el postgres para trabajar con el mismo de igual manera se agrego un plugin con el cual puedo trabajar desde intellj con la base de datos y ver sus cambios en tiempo real. se ha podido  crear  un usuario">
+      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_02_2023_16_39_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_02_2023_16_39__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_02_2023_18_34_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_02_2023_18_34__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Server/CommunicationServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server/CommunicationServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Server/DatabaseConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server/DatabaseConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Server/KeyboardHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server/KeyboardHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Server/ProcessHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server/ProcessHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Server/ServerApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server/ServerApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Shared/TestBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Shared/TestBase.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -25,6 +38,13 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GithubProjectSettings">
+    <option name="branchProtectionPatterns">
+      <list>
+        <option value="master" />
+      </list>
+    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -71,7 +91,7 @@
       <recent name="Server" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Client">
+  <component name="RunManager">
     <configuration name="Client" type="Application" factoryName="Application">
       <option name="ALTERNATIVE_JRE_PATH" value="openjdk-19" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -159,19 +179,7 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="origin/master2/origin2" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </State>
+            <State />
           </value>
         </entry>
       </map>
@@ -201,6 +209,11 @@
           <url>file://$PROJECT_DIR$/src/Shared/SerializationHandler.java</url>
           <line>13</line>
           <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Server/ProcessHandler.java</url>
+          <line>155</line>
+          <option name="timeStamp" value="13" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

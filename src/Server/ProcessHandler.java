@@ -6,6 +6,9 @@ import Shared.Command;
 import Shared.DataBoxHandler;
 
 import java.io.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -83,6 +86,7 @@ public class ProcessHandler {
 
     public String save() {
         DatabaseConnection databaseConnection = new DatabaseConnection();
+
         ServerApp.movieHashtable = databaseConnection.saveMovies(ServerApp.movieHashtable, ServerApp.getCurrentUser().getUserId());
         return "The changes was saved in the database";
     }

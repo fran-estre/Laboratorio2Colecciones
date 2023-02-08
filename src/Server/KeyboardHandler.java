@@ -7,7 +7,7 @@ public class KeyboardHandler implements Runnable{
     public void run() {
         String data;
         Scanner scanner = new Scanner(System.in);
-        System.out.println("READFILE: to read movies from file\nSAVE: to save file\nSAVEDB: to save to database\nEXIT: to finish execution");
+        System.out.println("READFILE: to read movies from file\nSAVE: to save file\nSAVEDB: to save to database\nADMIN:createAdmin\nEXIT: to finish execution");
         ProcessHandler processHandler = new ProcessHandler();
         while (!(data = scanner.nextLine().toUpperCase()).equals("EXIT")) {
             switch (data) {
@@ -25,10 +25,10 @@ public class KeyboardHandler implements Runnable{
                 }
                 case "ADMIN" -> {
                     processHandler.CreateAdmin();
-                    System.out.println("Ready ADMIN");
+                    System.out.println("Ready ADMIN\n");
                 }
             }
-            System.out.println("READFILE: to read dragons from file\nSAVE: to save file\nSAVEDB: to save to database\nEXIT: to finish execution");
+            System.out.println("READFILE: to read dragons from file\nSAVE: to save file\nSAVEDB: to save to database\nADMIN:createAdmin\nEXIT: to finish execution");
         }
         ServerApp.setExit(true);
     }
