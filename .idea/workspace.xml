@@ -4,19 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4629c319-5c2c-4dd7-a7cd-7652a73e27c4" name="Changes" comment="se agrego el driver de el postgres para trabajar con el mismo de igual manera se agrego un plugin con el cual puedo trabajar desde intellj con la base de datos y ver sus cambios en tiempo real. se ha podido  crear  un usuario">
-      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_02_2023_16_39_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_02_2023_16_39__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_02_2023_18_34_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_02_2023_18_34__Changes_.xml" beforeDir="false" />
+    <list default="true" id="4629c319-5c2c-4dd7-a7cd-7652a73e27c4" name="Changes" comment="se cambio el query">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Laboratorio2Colecciones.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Laboratorio2Colecciones.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Server/CommunicationServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server/CommunicationServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Server/DatabaseConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server/DatabaseConnection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Server/KeyboardHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server/KeyboardHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Server/ProcessHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server/ProcessHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Server/ServerApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server/ServerApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Shared/TestBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Shared/TestBase.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,13 +30,6 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GithubProjectSettings">
-    <option name="branchProtectionPatterns">
-      <list>
-        <option value="master" />
-      </list>
-    </option>
-  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -60,9 +44,9 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/HerramientaDeProgramacionJava/jars/postgresql-42.5.2.jar&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/francis/Downloads/postgresql-42.5.2.jar&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   },
@@ -91,7 +75,7 @@
       <recent name="Server" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Client">
     <configuration name="Client" type="Application" factoryName="Application">
       <option name="ALTERNATIVE_JRE_PATH" value="openjdk-19" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
