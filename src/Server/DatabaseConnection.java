@@ -36,7 +36,7 @@ public class DatabaseConnection {
                     location.y location_y,
                     location.z location_z,
                     location.name location_name
-                    from dragon\s
+                    from movies\s
                     left join coordinates on movie.id = coordinates.movie_id\s
                     left join persons on movie.id = persons.movie_id\s
                     left join location on persons.movie_id = location.person_id""";
