@@ -16,6 +16,7 @@ public class ProcessHandler {
     public String processCommand(Command command) {
         if (!isValidUser(command))
             return "Invalid user";
+        ServerApp.setCurrentUser(command.getUser());
         return switch (command.getCommandType()) {
             case HELP -> help();
             case INFO -> info();
