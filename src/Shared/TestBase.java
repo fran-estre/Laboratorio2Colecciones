@@ -1,5 +1,8 @@
 package Shared;
 
+import Entidades.User;
+import Server.ProcessHandler;
+
 import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
@@ -19,7 +22,20 @@ public class TestBase {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        ping();
+        User user1= new User();
+        user1.setName("fran");
+        user1.setPassword("1");
+
+        Command command=new Command();
+        command.setUser(user1);
+
+        ProcessHandler processHandler =new ProcessHandler();
+        if(!processHandler.isValidUser(command)){
+            System.out.println("Invalid user");
+        }else {
+            System.out.println("usuario valido");
+        }
+
 
 
     }

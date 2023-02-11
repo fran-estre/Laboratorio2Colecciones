@@ -100,15 +100,16 @@ public class DatabaseConnection {
             conn = DriverManager.getConnection(url, user, password);
             System.out.println("Connection to de db  established");
             Statement stmt;
-            String query = "Select password from public.users where name = '"
-                    + userToValidate.getName() + "';";
+            String query = "Select password from public.users where name ='"
+                    + userToValidate.getName() + "'";
             stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             if (!rs.next())
                 return false;
-
+            EncriptionHelper encriptionHelper =new EncriptionHelper();
+            byte[] givenPassword =encriptionHelper.encrypt(userToValidate.getPassword());
             byte[] dataToValidate = rs.getBytes("password");
-            return Arrays.equals(dataToValidate, new EncriptionHelper().encrypt(userToValidate.getPassword()));
+            return Arrays.equals(dataToValidate, givenPassword);
         } catch (SQLException e) {
             throw new Error("Problem", e);
         } finally {

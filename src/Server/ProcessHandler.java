@@ -38,7 +38,7 @@ public class ProcessHandler {
         DatabaseConnection databaseConnection = new DatabaseConnection();
         databaseConnection.CreateAdmin();
     }
-    private boolean isValidUser(Command command) {
+    public boolean isValidUser(Command command) {
         User user = command.getUser();
         if (user == null)
             return false;

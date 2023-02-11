@@ -13,8 +13,7 @@ public class EncriptionHelper {
             e.printStackTrace();
             return null;
         }
-        byte[] encodedhash = digest.digest(
-                original.getBytes(StandardCharsets.UTF_8));
+        byte[] encodedhash = digest.digest(original.getBytes(StandardCharsets.UTF_8));
         return encodedhash;
     }
 }
