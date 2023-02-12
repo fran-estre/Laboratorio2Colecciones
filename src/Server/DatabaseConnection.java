@@ -97,6 +97,7 @@ public class DatabaseConnection {
 
     public Integer IdUser(User userToValidate) {
         Connection conn = null;
+
         try {
             conn = DriverManager.getConnection(url, user, password);
             Statement stmt;
