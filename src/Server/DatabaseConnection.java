@@ -104,8 +104,8 @@ public class DatabaseConnection {
                     + userToValidate.getName() + "'";
             stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
-            Integer Id = rs.getInt("user_id");
-            return Id;
+            rs.next();
+            return rs.getInt("user_id");
         } catch (SQLException e) {
             throw new Error("Problem", e);
         } finally {
