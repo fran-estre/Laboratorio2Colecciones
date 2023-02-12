@@ -17,6 +17,7 @@ public class ProcessHandler {
         if (!isValidUser(command))
             return "Invalid user";
         ServerApp.setCurrentUser(command.getUser());
+        ServerApp.getCurrentUser().setUserId(getIdUserDb(command));
         return switch (command.getCommandType()) {
             case HELP -> help();
             case INFO -> info();
@@ -45,6 +46,11 @@ public class ProcessHandler {
             return false;
         DatabaseConnection databaseConnection = new DatabaseConnection();
         return databaseConnection.IsValidUser(user);
+    }
+    public Integer getIdUserDb(Command command){
+        User user = command.getUser();
+        DatabaseConnection databaseConnection = new DatabaseConnection();
+        return databaseConnection.IdUser(user);
     }
     private String executeScript(Command command) {
         StringBuilder dataFile = new StringBuilder();

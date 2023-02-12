@@ -75,7 +75,7 @@ public class DatabaseConnection {
                     movie.setTotalBoxOffice(totalBoxOffice);
                     movie.setMpaaRating(MpaaRating.valueOf(mpaaRating));
                     movie.setCoordinates(new Coordinates(x, y));
-                    movie.setOperator(new Person(personName, height, passportID,Color.valueOf(eyeColor) , new Location(xLocation, yLocation, zLocation, nameLocation)));
+                    movie.setOperator(new Person(personName, height, passportID, Color.valueOf(eyeColor), new Location(xLocation, yLocation, zLocation, nameLocation)));
                     movieHashtable.put(id, movie);
                 }
                 return movieHashtable;
@@ -94,11 +94,35 @@ public class DatabaseConnection {
             }
         }
     }
+
+    public Integer IdUser(User userToValidate) {
+        Connection conn = null;
+        try {
+            conn = DriverManager.getConnection(url, user, password);
+            Statement stmt;
+            String query = "Select user_id from public.users where name ='"
+                    + userToValidate.getName() + "'";
+            stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            Integer Id = rs.getInt("user_id");
+            return Id;
+        } catch (SQLException e) {
+            throw new Error("Problem", e);
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+    }
+
     public boolean IsValidUser(User userToValidate) {
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url, user, password);
-            System.out.println("Connection to de db  established");
             Statement stmt;
             String query = "Select password from public.users where name ='"
                     + userToValidate.getName() + "'";
@@ -106,8 +130,8 @@ public class DatabaseConnection {
             ResultSet rs = stmt.executeQuery(query);
             if (!rs.next())
                 return false;
-            EncriptionHelper encriptionHelper =new EncriptionHelper();
-            byte[] givenPassword =encriptionHelper.encrypt(userToValidate.getPassword());
+            EncriptionHelper encriptionHelper = new EncriptionHelper();
+            byte[] givenPassword = encriptionHelper.encrypt(userToValidate.getPassword());
             byte[] dataToValidate = rs.getBytes("password");
             return Arrays.equals(dataToValidate, givenPassword);
         } catch (SQLException e) {
@@ -138,7 +162,7 @@ public class DatabaseConnection {
             String query = "Insert into public.users (name, password) values (?, ?);";
 
             PreparedStatement pst = conn.prepareStatement(query);
-            pst.setString(1,name);
+            pst.setString(1, name);
             pst.setBytes(2, encryptedData);
             pst.executeUpdate();
         } catch (SQLException e) {
@@ -153,6 +177,7 @@ public class DatabaseConnection {
             }
         }
     }
+
     public Hashtable<Long, Movie> saveMovies(Hashtable<Long, Movie> movieHashtable, Integer userId) {
         // I delete all dragons that doesn't belong to the  current user
         movieHashtable.entrySet().removeIf(entry -> !entry.getValue().getUserId().equals(userId));
