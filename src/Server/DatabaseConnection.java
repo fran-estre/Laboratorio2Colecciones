@@ -3,6 +3,9 @@ package Server;
 import Entidades.*;
 
 import java.sql.*;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Hashtable;
 import java.util.Scanner;
@@ -15,6 +18,7 @@ public class DatabaseConnection {
 
     public Hashtable<Long, Movie> getMovies() {
         Connection conn = null;
+        DateTimeFormatter formatter =DateTimeFormatter.ofPattern("EEE LLL dd HH:mm:ss zzz yyyy");
         try {
             conn = DriverManager.getConnection(url, user, password);
             System.out.println("Connection to de db  established");
@@ -28,20 +32,20 @@ public class DatabaseConnection {
                     movies.total_box_office,
                     movies.budget,
                     movies.mpaa_rating,
-                    coordinate.x,
-                    coordinate.y,
-                    person.name person_name,
-                    person.height person_height,
-                    person.passport_id person_passport,
-                    person.eye_color person_eye,
-                    location.x location_x,
-                    location.y location_y,
-                    location.z location_z,
-                    location.name location_name
+                    coordinates.x,
+                    coordinates.y,
+                    persons.name person_name,
+                    persons.height person_height,
+                    persons.passport_id person_passport,
+                    persons.eye_color person_eye,
+                    locations.x location_x,
+                    locations.y location_y,
+                    locations.z location_z,
+                    locations.name location_name
                     from movies\s
                     left join coordinates on movie.id = coordinates.movie_id\s
                     left join persons on movie.id = persons.movie_id\s
-                    left join location on persons.movie_id = location.person_id""";
+                    left join locations on persons.movie_id = locations.person_id""";
             try (Statement stmt = conn.createStatement()) {
                 ResultSet rs = stmt.executeQuery(query);
                 Hashtable<Long, Movie> movieHashtable = new Hashtable<>();
@@ -69,7 +73,7 @@ public class DatabaseConnection {
                     movie.setUserId(userId);
                     movie.setId(id);
                     movie.setName(name);
-                    movie.setCreationDate(Date.valueOf(creationDate));
+                    movie.setCreationDate(Date.from(Instant.from(LocalDate.parse(creationDate,formatter))));
                     movie.setOscarsCount(oscarsCount);
                     movie.setBudget(budget);
                     movie.setTotalBoxOffice(totalBoxOffice);

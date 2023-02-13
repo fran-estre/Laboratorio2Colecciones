@@ -159,10 +159,10 @@ public class Movie implements Serializable, Comparable<Movie> {
 
     public String toInsert() {
         return String.format("""
-                        INSERT INTO public.movie(name, creation_date, oscars_count, total_box_office, budget, mpaa_rating, user_id) VALUES ('%s', '%s', %s, %s, %s, %s, %s);
-                        INSERT INTO public.coordinates(movie_id, x, y) SELECT MAX(id), %s, %s FROM public.movie;
-                        INSERT INTO public.person(movie_id, name, height, passport_id, eye_color) SELECT MAX(id), '%s', %s, %s , %s FROM public.movie;
-                        INSERT INTO public.location(person_id, x, y, z, name) SELECT MAX(id), %s, %s, %s, %s' FROM public.movie;"""
+                        INSERT INTO public.movies(name, creation_date, oscars_count, total_box_office, budget, mpaa_rating, user_id) VALUES ('%s', '%s', %s, %s, %s, '%s', %s);
+                        INSERT INTO public.coordinates(movie_id, x, y) SELECT MAX(id), %s, %s FROM public.movies;
+                        INSERT INTO public.persons(movie_id, name, height, passport_id, eye_color) SELECT MAX(id), '%s', %s, '%s' , '%s' FROM public.movies;
+                        INSERT INTO public.locations(person_id, x, y, z, name) SELECT MAX(id), %s, %s, %s, '%s' FROM public.movies;"""
                 , getName()
                 , getCreationDate().toString()
                 , getOscarsCount()
