@@ -243,6 +243,7 @@ public class ProcessHandler {
     private String insert(Command command) {
         Movie movie= command.getDataCommand().getMovie();
         movie.setId(getNewId());
+        movie.setUserId(ServerApp.getCurrentUser().getUserId());
         ServerApp.movieHashtable.put(command.getDataCommand().getKey(),movie);
         return "The movie was inserted.";
     }
