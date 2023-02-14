@@ -34,7 +34,8 @@ public class Movie implements Serializable, Comparable<Movie> {
     public Movie() {
     }
 
-    public Movie(long id, String name, Coordinates coordinates, Date creationDate, long oscarsCount, Integer budget, int totalBoxOffice, MpaaRating mpaaRating, Person operator) {
+    public Movie(Integer userId,long id, String name, Coordinates coordinates, Date creationDate, long oscarsCount, Integer budget, int totalBoxOffice, MpaaRating mpaaRating, Person operator) {
+        this.userId=userId;
         this.id = id;
         this.name = name;
         this.coordinates = coordinates;
@@ -125,6 +126,7 @@ public class Movie implements Serializable, Comparable<Movie> {
     }
 
     public String toCsv() {
+        String userIdCsv = String.format("%s,", getUserId());
         String idCsv = String.format("%s,", getId());
         String nameCsv = String.format("%s,", getName());
         String dateCsv = String.format("%s,", getCreationDate());
@@ -134,7 +136,8 @@ public class Movie implements Serializable, Comparable<Movie> {
         String coordinatesCsv = getCoordinates().toCsv();
         String mpaaRatingCsv = String.format("%s,", getMpaaRating());
         String personCsv = getOperator().toCsv();
-        String movieCsv = String.format("%s%s%s%s%s%s%s%s%s",
+        String movieCsv = String.format("%s%s%s%s%s%s%s%s%s%s",
+                userIdCsv,
                 idCsv,
                 nameCsv,
                 coordinatesCsv,

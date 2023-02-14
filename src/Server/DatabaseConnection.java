@@ -2,13 +2,10 @@ package Server;
 
 import Entidades.*;
 
-import javax.lang.model.util.SimpleAnnotationValueVisitor14;
+
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.Date;
 
@@ -20,7 +17,7 @@ public class DatabaseConnection {
 
     public Hashtable<Long, Movie> getMovies() {
         Connection conn = null;
-        SimpleDateFormat formatter = new SimpleDateFormat("EEE LLL dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
+        SimpleDateFormat formatter = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
         try {
             conn = DriverManager.getConnection(url, user, password);
             System.out.println("Connection to de db  established");
@@ -56,21 +53,22 @@ public class DatabaseConnection {
                     long id = rs.getLong("id");
                     String name = rs.getString("name");
                     String creationDate = rs.getString("creation_date");
-                    Long oscarsCount = rs.getLong("oscars_count");
+                    long oscarsCount = rs.getLong("oscars_count");
                     Integer budget = rs.getInt("budget");
-                    Integer totalBoxOffice = rs.getInt("total_box_office");
+                    int totalBoxOffice = rs.getInt("total_box_office");
                     String mpaaRating = rs.getString("mpaa_rating");
                     Double x = rs.getDouble("x");
-                    Float y = rs.getFloat("y");
+                    float y = rs.getFloat("y");
                     String personName = rs.getString("person_name");
                     Long height = rs.getLong("person_height");
                     String passportID = rs.getString("person_passport");
                     String eyeColor = rs.getString("person_eye");
                     Long xLocation = rs.getLong("location_x");
-                    Float yLocation = rs.getFloat("location_y");
+                    float yLocation = rs.getFloat("location_y");
                     Float zLocation = rs.getFloat("location_z");
                     String nameLocation = rs.getString("location_name");
                     Date date=formatter.parse(creationDate);
+
                     Movie movie = new Movie();
                     movie.setUserId(userId);
                     movie.setId(id);

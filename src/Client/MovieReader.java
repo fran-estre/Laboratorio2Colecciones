@@ -56,8 +56,6 @@ public class MovieReader {
         } while (totalBoxOffice <= 0);
         MpaaRating rating = getMpaaRating(sc);
         Person operator = createPerson(sc);
-
-
         return new Movie(name, coordinates, date, oscarsCount, budget, totalBoxOffice, rating, operator);
     }
     private static MpaaRating getMpaaRating(Scanner sc) {

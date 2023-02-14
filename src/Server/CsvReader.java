@@ -35,26 +35,26 @@ public class CsvReader {
         try {
             while ((line = reader.readLine()) != null) {
                 list = Arrays.asList(line.split(","));
-                movie = new Movie(Long.parseLong(list.get(1)), list.get(2),
+                movie = new Movie(Integer.parseInt(list.get(1)),Long.parseLong(list.get(2)), list.get(3),
                         new Coordinates(
-                                Double.parseDouble(list.get(3)),
-                                Float.parseFloat(list.get(4))
+                                Double.parseDouble(list.get(4)),
+                                Float.parseFloat(list.get(5))
                         ),
-                        formatter.parse(list.get(5)),
-                        Long.parseLong(list.get(6)),
-                        Integer.parseInt(list.get(7)),
+                        formatter.parse(list.get(6)),
+                        Long.parseLong(list.get(7)),
                         Integer.parseInt(list.get(8)),
-                        getMpaaRating(list.get(9)),
+                        Integer.parseInt(list.get(9)),
+                        getMpaaRating(list.get(10)),
                         new Person(
-                                list.get(10),
-                                Long.parseLong(list.get(11)),
-                                list.get(12),
-                                getEye(list.get(13)),
+                                list.get(11),
+                                Long.parseLong(list.get(12)),
+                                list.get(13),
+                                getEye(list.get(14)),
                                 new Location(
-                                        Long.parseLong(list.get(14)),
-                                        Float.parseFloat(list.get(15)),
+                                        Long.parseLong(list.get(15)),
                                         Float.parseFloat(list.get(16)),
-                                        list.get(17)
+                                        Float.parseFloat(list.get(17)),
+                                        list.get(18)
                                 )
                         )
                 );
