@@ -54,6 +54,7 @@ public class ProcessHandler {
     }
     private String executeScript(Command command) {
         StringBuilder dataFile = new StringBuilder();
+        User user =command.getUser();
         dataFile.append(command.getDataCommand().getDataFile());
         if (dataFile.length() <= 0) {
             return "The file was empty.";
@@ -64,14 +65,15 @@ public class ProcessHandler {
 
         while (!(line = getLine(dataFile)).isEmpty()) {
             output.append("\n").append(line).append("\n");
-            output.append(executeCommand(line));
+            output.append(executeCommand(line,user));
         }
         return output.toString();
     }
 
-    private String executeCommand(String currentCommand) {
+    private String executeCommand(String currentCommand,User user) {
         String[] parts = currentCommand.toUpperCase().split(" ");
         Command command = new Command();
+        command.setUser(user);
         StringBuilder comments = new StringBuilder();
         if (DataBoxHandler.getDataBox(parts, command, comments, false))
             return this.processCommand(command);
