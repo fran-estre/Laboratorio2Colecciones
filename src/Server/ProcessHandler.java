@@ -151,7 +151,7 @@ public class ProcessHandler {
 
     private String show() {
         if (ServerApp.movieHashtable.isEmpty()) {
-            return "There are no dragons";
+            return "There are no movies";
         }
         StringBuilder dataMovie = new StringBuilder();
 

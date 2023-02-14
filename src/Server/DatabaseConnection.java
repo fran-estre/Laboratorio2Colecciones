@@ -20,7 +20,6 @@ public class DatabaseConnection {
         SimpleDateFormat formatter = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
         try {
             conn = DriverManager.getConnection(url, user, password);
-            System.out.println("Connection to de db  established");
             String query = """
                     Select\s
                     movies.user_id,

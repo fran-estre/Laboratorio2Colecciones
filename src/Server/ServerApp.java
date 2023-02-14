@@ -70,7 +70,6 @@ public class ServerApp {
             KeyboardHandler keyboardHandler = new KeyboardHandler();
             Thread t1 = new Thread(keyboardHandler);
             t1.start();
-
             CommunicationServer communication = new CommunicationServer(port);
             communication.listen();
         } catch (SocketException | UnknownHostException e) {

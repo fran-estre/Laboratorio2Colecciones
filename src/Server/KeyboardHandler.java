@@ -28,7 +28,7 @@ public class KeyboardHandler implements Runnable{
                     System.out.println("Ready ADMIN\n");
                 }
             }
-            System.out.println("READFILE: to read dragons from file\nSAVE: to save file\nSAVEDB: to save to database\nADMIN:createAdmin\nEXIT: to finish execution");
+            System.out.println("READFILE: to read movies from file\nSAVE: to save file\nSAVEDB: to save to database\nADMIN:createAdmin\nEXIT: to finish execution");
         }
         ServerApp.setExit(true);
     }
