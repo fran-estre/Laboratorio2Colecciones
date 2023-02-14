@@ -2,13 +2,15 @@ package Server;
 
 import Entidades.*;
 
+import javax.lang.model.util.SimpleAnnotationValueVisitor14;
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
-import java.util.Hashtable;
-import java.util.Scanner;
+import java.util.*;
+import java.util.Date;
 
 public class DatabaseConnection {
     String user = "postgres";
@@ -18,7 +20,7 @@ public class DatabaseConnection {
 
     public Hashtable<Long, Movie> getMovies() {
         Connection conn = null;
-        DateTimeFormatter formatter =DateTimeFormatter.ofPattern("EEE LLL dd HH:mm:ss zzz yyyy");
+        SimpleDateFormat formatter = new SimpleDateFormat("EEE LLL dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
         try {
             conn = DriverManager.getConnection(url, user, password);
             System.out.println("Connection to de db  established");
@@ -43,8 +45,8 @@ public class DatabaseConnection {
                     locations.z location_z,
                     locations.name location_name
                     from movies\s
-                    left join coordinates on movie.id = coordinates.movie_id\s
-                    left join persons on movie.id = persons.movie_id\s
+                    left join coordinates on movies.id = coordinates.movie_id\s
+                    left join persons on movies.id = persons.movie_id\s
                     left join locations on persons.movie_id = locations.person_id""";
             try (Statement stmt = conn.createStatement()) {
                 ResultSet rs = stmt.executeQuery(query);
@@ -68,12 +70,12 @@ public class DatabaseConnection {
                     Float yLocation = rs.getFloat("location_y");
                     Float zLocation = rs.getFloat("location_z");
                     String nameLocation = rs.getString("location_name");
-
+                    Date date=formatter.parse(creationDate);
                     Movie movie = new Movie();
                     movie.setUserId(userId);
                     movie.setId(id);
                     movie.setName(name);
-                    movie.setCreationDate(Date.from(Instant.from(LocalDate.parse(creationDate,formatter))));
+                    movie.setCreationDate(date);
                     movie.setOscarsCount(oscarsCount);
                     movie.setBudget(budget);
                     movie.setTotalBoxOffice(totalBoxOffice);
@@ -85,6 +87,8 @@ public class DatabaseConnection {
                 return movieHashtable;
             } catch (SQLException e) {
                 throw new Error("Problem", e);
+            } catch (ParseException e) {
+                throw new RuntimeException(e);
             }
         } catch (SQLException e) {
             throw new Error("Problem", e);
