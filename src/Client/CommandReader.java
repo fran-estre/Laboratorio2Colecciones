@@ -6,7 +6,7 @@ import Shared.DataBoxHandler;
 import java.util.Objects;
 import java.util.Scanner;
 
-public class CommandReader {
+public class CommandReader implements Runnable {
     public void readConsoleCommand() {
         String currentCommand;
         CommandSender commandSender = new CommandSender();
@@ -44,5 +44,10 @@ public class CommandReader {
         return !Objects.equals(currentCommand, "EXIT");
         // si es  exit es !true osea false y se termina el loop, su no es exit es !false  por lo que es true
 
+    }
+
+    @Override
+    public void run() {
+        readConsoleCommand();
     }
 }

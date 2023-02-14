@@ -71,8 +71,9 @@ public class ServerApp {
             Thread t1 = new Thread(keyboardHandler);
             t1.start();
             CommunicationServer communication = new CommunicationServer(port);
-            communication.listen();
-        } catch (SocketException | UnknownHostException e) {
+            Thread t2 = new Thread(communication);
+            t2.start();
+        } catch (SocketException e) {
             e.printStackTrace();
             System.out.println("There was a socket exception. " + e.getMessage());
         }

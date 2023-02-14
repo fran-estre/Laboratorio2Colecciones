@@ -9,7 +9,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.*;
 
-public class CommunicationServer {
+public class CommunicationServer  implements Runnable {
     private final DatagramSocket datagramSocket;
 
     public CommunicationServer(Integer port) throws SocketException {
@@ -43,6 +43,7 @@ public class CommunicationServer {
 
                 Command command = (Command) SerializationHandler.deserialize(buffer);
                 String response = processHandler.processCommand(command);
+
                 AnswerToClient(datagramPacket.getAddress(), datagramPacket.getPort(), response);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -51,6 +52,7 @@ public class CommunicationServer {
             }
         }
     }
+
 
     private void AnswerToClient(InetAddress clientAddress, int clientPort, String response) throws IOException {
         DataBox dataBox = new DataBox();
@@ -81,4 +83,13 @@ public class CommunicationServer {
             this.datagramSocket.send(responsePacket);
         }
     }
+    @Override
+    public void run() {
+        try {
+            listen();
+        } catch (UnknownHostException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
+

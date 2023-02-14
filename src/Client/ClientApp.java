@@ -1,6 +1,7 @@
 package Client;
 
 import Entidades.User;
+import Server.KeyboardHandler;
 
 import java.net.SocketException;
 import java.net.UnknownHostException;
@@ -41,8 +42,11 @@ public class ClientApp {
         System.out.print("Enter your password: ");
         user.setPassword(scanner.nextLine());
 
-        if (initializeCommunication(serverAddress, port))
-            new CommandReader().readConsoleCommand();
+        if (initializeCommunication(serverAddress, port)){
+            CommandReader commandReader = new CommandReader();
+            Thread t1 = new Thread(commandReader);
+            t1.start();
+        }
     }
 
     private static Boolean initializeCommunication(String serverAddress, Integer port) {
