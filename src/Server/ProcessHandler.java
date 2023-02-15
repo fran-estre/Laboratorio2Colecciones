@@ -6,9 +6,6 @@ import Shared.Command;
 import Shared.DataBoxHandler;
 
 import java.io.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -40,6 +37,7 @@ public class ProcessHandler {
         DatabaseConnection databaseConnection = new DatabaseConnection();
         databaseConnection.CreateAdmin();
     }
+
     public boolean isValidUser(Command command) {
         User user = command.getUser();
         if (user == null)
@@ -47,14 +45,16 @@ public class ProcessHandler {
         DatabaseConnection databaseConnection = new DatabaseConnection();
         return databaseConnection.IsValidUser(user);
     }
-    public Integer getIdUserDb(Command command){
+
+    public Integer getIdUserDb(Command command) {
         User user = command.getUser();
         DatabaseConnection databaseConnection = new DatabaseConnection();
         return databaseConnection.IdUser(user);
     }
+
     private String executeScript(Command command) {
         StringBuilder dataFile = new StringBuilder();
-        User user =command.getUser();
+        User user = command.getUser();
         dataFile.append(command.getDataCommand().getDataFile());
         if (dataFile.length() <= 0) {
             return "The file was empty.";
@@ -65,12 +65,12 @@ public class ProcessHandler {
 
         while (!(line = getLine(dataFile)).isEmpty()) {
             output.append("\n").append(line).append("\n");
-            output.append(executeCommand(line,user));
+            output.append(executeCommand(line, user));
         }
         return output.toString();
     }
 
-    private String executeCommand(String currentCommand,User user) {
+    private String executeCommand(String currentCommand, User user) {
         String[] parts = currentCommand.toUpperCase().split(" ");
         Command command = new Command();
         command.setUser(user);
@@ -95,35 +95,40 @@ public class ProcessHandler {
 
     public String save() {
         DatabaseConnection databaseConnection = new DatabaseConnection();
-
-        ServerApp.movieHashtable = databaseConnection.saveMovies(ServerApp.movieHashtable, ServerApp.getCurrentUser().getUserId());
-        return "The changes was saved in the database";
+        synchronized (ServerApp.movieHashtable) {
+            ServerApp.movieHashtable = databaseConnection.saveMovies(ServerApp.movieHashtable, ServerApp.getCurrentUser().getUserId());
+            return "The changes was saved in the database";
+        }
     }
-    public String saveToFile()  {
-        Iterator<Map.Entry<Long, Movie>> it = ServerApp.movieHashtable.entrySet().iterator();
-        String movieString = "";
-        while (it.hasNext()) {
-            Map.Entry<Long, Movie> currentMovie = it.next();
-            movieString += currentMovie.getKey() + "," + currentMovie.getValue().toCsv() + "\n";
-        }
 
-        BufferedOutputStream writer;
-        try {
-            writer = new BufferedOutputStream(new FileOutputStream(ServerApp.getFileName()));
-        } catch (IOException e) {
-            e.printStackTrace();
-            return "There was a problem while saving";
+    public String saveToFile() {
+        synchronized (ServerApp.movieHashtable) {
+            Iterator<Map.Entry<Long, Movie>> it = ServerApp.movieHashtable.entrySet().iterator();
+            String movieString = "";
+            while (it.hasNext()) {
+                Map.Entry<Long, Movie> currentMovie = it.next();
+                movieString += currentMovie.getKey() + "," + currentMovie.getValue().toCsv() + "\n";
+            }
+
+
+            BufferedOutputStream writer;
+            try {
+                writer = new BufferedOutputStream(new FileOutputStream(ServerApp.getFileName()));
+            } catch (IOException e) {
+                e.printStackTrace();
+                return "There was a problem while saving";
+            }
+            byte[] b = movieString.getBytes();
+            try {
+                writer.write(b);
+                writer.flush();
+                writer.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+                return "There was a problem while saving";
+            }
+            return "The changes were saved";
         }
-        byte[] b = movieString.getBytes();
-        try {
-            writer.write(b);
-            writer.flush();
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return "There was a problem while saving";
-        }
-        return "The changes were saved";
     }
 
     private String help() {
@@ -146,128 +151,155 @@ public class ProcessHandler {
     }
 
     private String info() {
-        return "type: Hashtable<Long, Movie>\n" +
-                "initialization: " + ServerApp.getInitialization() + "\n" +
-                "length: " + ServerApp.movieHashtable.size();
+        synchronized (ServerApp.movieHashtable) {
+            return "type: Hashtable<Long, Movie>\n" +
+                    "initialization: " + ServerApp.getInitialization() + "\n" +
+                    "length: " + ServerApp.movieHashtable.size();
+        }
     }
 
     private String show() {
-        if (ServerApp.movieHashtable.isEmpty()) {
-            return "There are no movies";
-        }
-        StringBuilder dataMovie = new StringBuilder();
+        synchronized (ServerApp.movieHashtable) {
+            if (ServerApp.movieHashtable.isEmpty()) {
+                return "There are no movies";
+            }
+            StringBuilder dataMovie = new StringBuilder();
 
-        ServerApp.movieHashtable.forEach((k, v) -> dataMovie.append("\n").append(v.toString()));
-        return dataMovie.toString();
+            ServerApp.movieHashtable.forEach((k, v) -> dataMovie.append("\n").append(v.toString()));
+            return dataMovie.toString();
+        }
     }
 
     private String clear() {
-        ServerApp.movieHashtable = new Hashtable<>();
-        return "the collection was cleared";
+        synchronized (ServerApp.movieHashtable) {
+            ServerApp.movieHashtable = new Hashtable<>();
+            return "the collection was cleared";
+        }
     }
 
     private String countLessThanOscarsCount(Command command) {
-        AtomicReference<Integer> counter = new AtomicReference<>(0);
-        ServerApp.movieHashtable.forEach((k, v) -> {
-            if (v.getOscarsCount() < command.getDataCommand().getOscarsCount())
-                counter.getAndSet(counter.get() + 1);
-        });
-        return "There are " + counter.get() + " movies with less than " + command.getDataCommand().getOscarsCount() + " oscars.";
+        synchronized (ServerApp.movieHashtable) {
+            AtomicReference<Integer> counter = new AtomicReference<>(0);
+            ServerApp.movieHashtable.forEach((k, v) -> {
+                if (v.getOscarsCount() < command.getDataCommand().getOscarsCount())
+                    counter.getAndSet(counter.get() + 1);
+            });
+            return "There are " + counter.get() + " movies with less than " + command.getDataCommand().getOscarsCount() + " oscars.";
+        }
     }
 
     private String remove(Command command) {
-        if (ServerApp.movieHashtable.containsKey(command.getDataCommand().getKey())) {
-            ServerApp.movieHashtable.remove(command.getDataCommand().getKey());
-            return "The movie was removed.";
-        } else
-            return "The movie with the given key doesn't exist.";
+        synchronized (ServerApp.movieHashtable) {
+            if (ServerApp.movieHashtable.containsKey(command.getDataCommand().getKey())) {
+                ServerApp.movieHashtable.remove(command.getDataCommand().getKey());
+                return "The movie was removed.";
+            } else
+                return "The movie with the given key doesn't exist.";
+        }
     }
 
     private String replaceIfGreater(Command command) {
-        Long key = command.getDataCommand().getKey();
-        long oscarsCount = command.getDataCommand().getOscarsCount();
-        if (ServerApp.movieHashtable.containsKey(key))
-            if (ServerApp.movieHashtable.get(key).getOscarsCount() < oscarsCount) {
-                ServerApp.movieHashtable.get(key).setOscarsCount(oscarsCount);
-                return "The oscarsCount was replaced.";
-            }
-        return "Nothing to replace.";
+        synchronized (ServerApp.movieHashtable) {
+            Long key = command.getDataCommand().getKey();
+            long oscarsCount = command.getDataCommand().getOscarsCount();
+            if (ServerApp.movieHashtable.containsKey(key))
+                if (ServerApp.movieHashtable.get(key).getOscarsCount() < oscarsCount) {
+                    ServerApp.movieHashtable.get(key).setOscarsCount(oscarsCount);
+                    return "The oscarsCount was replaced.";
+                }
+            return "Nothing to replace.";
+        }
     }
 
     private String replaceIfLower(Command command) {
-        Long key = command.getDataCommand().getKey();
-        long oscarsCount = command.getDataCommand().getOscarsCount();
-        if (ServerApp.movieHashtable.containsKey(key))
-            if (ServerApp.movieHashtable.get(key).getOscarsCount() > oscarsCount) {
-                ServerApp.movieHashtable.get(key).setOscarsCount(oscarsCount);
-                return "The oscarsCount was replaced.";
-            }
-        return "Nothing to replace.";
+        synchronized (ServerApp.movieHashtable) {
+            Long key = command.getDataCommand().getKey();
+            long oscarsCount = command.getDataCommand().getOscarsCount();
+            if (ServerApp.movieHashtable.containsKey(key))
+                if (ServerApp.movieHashtable.get(key).getOscarsCount() > oscarsCount) {
+                    ServerApp.movieHashtable.get(key).setOscarsCount(oscarsCount);
+                    return "The oscarsCount was replaced.";
+                }
+            return "Nothing to replace.";
+        }
     }
 
     private String remove_greater_key(Command command) {
-        Iterator<Map.Entry<Long, Movie>> it = ServerApp.movieHashtable.entrySet().iterator();
-        int deleted = 0;
-        while (it.hasNext()) {
-            Map.Entry<Long, Movie> entry = it.next();
-            if (entry.getKey() > command.getDataCommand().getKey()) {
-                it.remove();
-                deleted++;
+        synchronized (ServerApp.movieHashtable) {
+            Iterator<Map.Entry<Long, Movie>> it = ServerApp.movieHashtable.entrySet().iterator();
+            int deleted = 0;
+            while (it.hasNext()) {
+                Map.Entry<Long, Movie> entry = it.next();
+                if (entry.getKey() > command.getDataCommand().getKey()) {
+                    it.remove();
+                    deleted++;
+                }
             }
+            return "Deleted elements: " + deleted + ".";
         }
-        return "Deleted elements: " + deleted + ".";
     }
 
     private String printAscending() {
-        Iterator<Map.Entry<Long, Movie>> it = ServerApp.movieHashtable.entrySet().iterator();
-        ArrayList<Movie> list = new ArrayList<>();
-        while (it.hasNext()) {
-            Map.Entry<Long, Movie> currentMovie = it.next();
-            list.add(currentMovie.getValue());
+        synchronized (ServerApp.movieHashtable) {
+            Iterator<Map.Entry<Long, Movie>> it = ServerApp.movieHashtable.entrySet().iterator();
+            ArrayList<Movie> list = new ArrayList<>();
+            while (it.hasNext()) {
+                Map.Entry<Long, Movie> currentMovie = it.next();
+                list.add(currentMovie.getValue());
+            }
+            Collections.sort(list);
+            return "Sorted collection: " + list;
         }
-        Collections.sort(list);
-        return "Sorted collection: " + list;
     }
 
     private String printFieldDescendingOscarsCount() {
-        Iterator<Map.Entry<Long, Movie>> it = ServerApp.movieHashtable.entrySet().iterator();
-        ArrayList<Movie> list = new ArrayList<>();
-        while (it.hasNext()) {
-            Map.Entry<Long, Movie> currentMovie = it.next();
-            list.add(currentMovie.getValue());
+        synchronized (ServerApp.movieHashtable) {
+            Iterator<Map.Entry<Long, Movie>> it = ServerApp.movieHashtable.entrySet().iterator();
+            ArrayList<Movie> list = new ArrayList<>();
+            while (it.hasNext()) {
+                Map.Entry<Long, Movie> currentMovie = it.next();
+                list.add(currentMovie.getValue());
+            }
+            list.sort(compareByOscars);
+            return "Sorted collection: " + list;
         }
-        list.sort(compareByOscars);
-        return "Sorted collection: " + list;
     }
 
     Comparator<Movie> compareByOscars = (o1, o2) -> (int) (o1.getOscarsCount() - o2.getOscarsCount());
 
     private String insert(Command command) {
-        Movie movie= command.getDataCommand().getMovie();
-        movie.setId(getNewId());
-        movie.setUserId(ServerApp.getCurrentUser().getUserId());
-        ServerApp.movieHashtable.put(command.getDataCommand().getKey(),movie);
-        return "The movie was inserted.";
+        synchronized (ServerApp.movieHashtable) {
+            Movie movie = command.getDataCommand().getMovie();
+            movie.setId(getNewId());
+            movie.setUserId(ServerApp.getCurrentUser().getUserId());
+            ServerApp.movieHashtable.put(command.getDataCommand().getKey(), movie);
+            return "The movie was inserted.";
+        }
     }
 
     private String update(Command command) {
-        for (Map.Entry<Long, Movie> entry : ServerApp.movieHashtable.entrySet()) {
-            Movie movieA = ServerApp.movieHashtable.get(entry.getKey());
-            if (movieA.getId() == command.getDataCommand().getMovie().getId()) {
-                ServerApp.movieHashtable.replace(entry.getKey(), command.getDataCommand().getMovie());
-                return "The movie was updated.";
+        synchronized (ServerApp.movieHashtable) {
+            for (Map.Entry<Long, Movie> entry : ServerApp.movieHashtable.entrySet()) {
+                Movie movieA = ServerApp.movieHashtable.get(entry.getKey());
+                if (movieA.getId() == command.getDataCommand().getMovie().getId()) {
+                    ServerApp.movieHashtable.replace(entry.getKey(), command.getDataCommand().getMovie());
+                    return "The movie was updated.";
+                }
             }
         }
         return "The movie with the id doesn't exist.";
     }
+
     private static Long getNewId() {
-        Long maxKey = Long.valueOf(0);
-        for (Map.Entry<Long, Movie> entry : ServerApp.movieHashtable.entrySet()) {
-            if (entry.getKey() > maxKey) {
-                maxKey = entry.getKey();
+        synchronized (ServerApp.movieHashtable) {
+            Long maxKey = Long.valueOf(0);
+            for (Map.Entry<Long, Movie> entry : ServerApp.movieHashtable.entrySet()) {
+                if (entry.getKey() > maxKey) {
+                    maxKey = entry.getKey();
+                }
             }
+            maxKey++;
+            return maxKey;
         }
-        maxKey++;
-        return maxKey;
     }
 }

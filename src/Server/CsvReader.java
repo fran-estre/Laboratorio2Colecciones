@@ -15,7 +15,8 @@ import java.util.Locale;
 
 public class CsvReader {
     /**
-     *  reads the file
+     * reads the file
+     *
      * @param fileName file path
      * @return collection
      */
@@ -32,43 +33,47 @@ public class CsvReader {
         List<String> list;
         Movie movie;
         SimpleDateFormat formatter = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
-        try {
-            while ((line = reader.readLine()) != null) {
-                list = Arrays.asList(line.split(","));
-                movie = new Movie(Integer.parseInt(list.get(1)),Long.parseLong(list.get(2)), list.get(3),
-                        new Coordinates(
-                                Double.parseDouble(list.get(4)),
-                                Float.parseFloat(list.get(5))
-                        ),
-                        formatter.parse(list.get(6)),
-                        Long.parseLong(list.get(7)),
-                        Integer.parseInt(list.get(8)),
-                        Integer.parseInt(list.get(9)),
-                        getMpaaRating(list.get(10)),
-                        new Person(
-                                list.get(11),
-                                Long.parseLong(list.get(12)),
-                                list.get(13),
-                                getEye(list.get(14)),
-                                new Location(
-                                        Long.parseLong(list.get(15)),
-                                        Float.parseFloat(list.get(16)),
-                                        Float.parseFloat(list.get(17)),
-                                        list.get(18)
-                                )
-                        )
-                );
-                movies.put(Long.parseLong(list.get(0)), movie);
+        synchronized (movies) {
+            try {
+                while ((line = reader.readLine()) != null) {
+                    list = Arrays.asList(line.split(","));
+                    movie = new Movie(Integer.parseInt(list.get(1)), Long.parseLong(list.get(2)), list.get(3),
+                            new Coordinates(
+                                    Double.parseDouble(list.get(4)),
+                                    Float.parseFloat(list.get(5))
+                            ),
+                            formatter.parse(list.get(6)),
+                            Long.parseLong(list.get(7)),
+                            Integer.parseInt(list.get(8)),
+                            Integer.parseInt(list.get(9)),
+                            getMpaaRating(list.get(10)),
+                            new Person(
+                                    list.get(11),
+                                    Long.parseLong(list.get(12)),
+                                    list.get(13),
+                                    getEye(list.get(14)),
+                                    new Location(
+                                            Long.parseLong(list.get(15)),
+                                            Float.parseFloat(list.get(16)),
+                                            Float.parseFloat(list.get(17)),
+                                            list.get(18)
+                                    )
+                            )
+                    );
+                    movies.put(Long.parseLong(list.get(0)), movie);
+                }
+                return movies;
+            } catch (IOException | ParseException e) {
+                e.printStackTrace();
+                return null;
             }
-            return movies;
-        } catch (IOException | ParseException e) {
-            e.printStackTrace();
-            return null;
         }
+
     }
 
     /**
-     *  get the rating
+     * get the rating
+     *
      * @param rate string
      * @return rating
      */
@@ -86,6 +91,7 @@ public class CsvReader {
 
     /**
      * get the  color
+     *
      * @param eye string
      * @return color
      */
